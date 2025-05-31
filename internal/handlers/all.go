@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func HandleAllCommand(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
+func HandleAllCommand(bot *tgbotapi.BotAPI, update tgbotapi.Update) error {
 
 	roman_r := os.Getenv("ROMAN_R")
 	roman_k := os.Getenv("ROMAN_K")
@@ -15,5 +15,6 @@ func HandleAllCommand(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 
 	msg := roman_r + "\n" + roman_k + "\n" + gaziz + "\n" + viktor + "\n" + dmitriy
 
-	bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, msg))
+	_, err := bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, msg))
+	return err
 }

@@ -31,14 +31,20 @@ func main() {
 		if update.Message.IsCommand() {
 			switch update.Message.Command() {
 			case "help":
-				handlers.HandleHelpCommand(bot, update)
+				if err := handlers.HandleHelpCommand(bot, update); err != nil {
+					log.Println(err)
+				}
 			case "all":
-				handlers.HandleAllCommand(bot, update)
+				if err := handlers.HandleAllCommand(bot, update); err != nil {
+					log.Println(err)
+				}
 			default:
-				bot.Send(tgbotapi.NewMessage(
+				if _, err := bot.Send(tgbotapi.NewMessage(
 					update.Message.Chat.ID,
 					"Unknown command...",
-				))
+				)); err != nil {
+					log.Println(err)
+				}
 			}
 		}
 	}
