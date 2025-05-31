@@ -32,6 +32,8 @@ func main() {
 			switch update.Message.Command() {
 			case "help":
 				handlers.HandleHelpCommand(bot, update)
+			case "all":
+				handlers.HandleAllCommand(bot, update)
 			default:
 				bot.Send(tgbotapi.NewMessage(
 					update.Message.Chat.ID,
